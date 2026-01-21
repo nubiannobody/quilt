@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Business Quilt</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script type="module">
+    import * as lucide from 'https://cdn.skypack.dev/lucide-react';
+    window.LucideReact = lucide;
+  </script>
+  <style>
+    .flip-card {
+      perspective: 1000px;
+    }
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+    }
+    .flip-card.flipped .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+    .flip-card-front, .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+    .flip-card-back {
+      transform: rotateY(180deg);
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+    const { useState, useMemo } = React;
+    const { X, ExternalLink, Globe } = window.LucideReact;
+
+    const INDUSTRIES = {
+      'Food + Beverage': '#FF6B6B',
+      'Arts + Entertainment': '#4ECDC4',
+      'Health + Beauty': '#FFD93D',
+      'Professional Services': '#6C5CE7',
+      'Transportation': '#A8E6CF',
+      'Construction': '#FF8B94',
+      'Retail': '#95E1D3'
+    };
+
+    const AFFINITIES = {
+      'Women Owned': '#E91E63',
+      'Black Owned': '#8B4513',
+      'LGBTQIA+ Owned': '#9C27B0',
+      'Veteran Owned': '#1565C0',
+      'Shop In Person': '#F57C00'
+    };
+
+    const names = [
+      { logo: "logos/88__Seconds_LLC_logo.png", name: "88 Seconds LLC", tagline: "Delivering perfection in every heartbeat of time.", website: "https://metierbrewing.com/" },
+      { logo: "logos/A_DJ_AND_A_COOK_LLC_logo.webp", name: "A DJ AND A COOK LLC", tagline: "Mixing beats and flavors that move your soul.", website: "https://www.feedthepeopleseattle.com" },
+      { logo: "logos/ACEAcademy_logo.webp", name: "ACE Academy", tagline: "Building brilliance, one student at a time.", website: "https://www.aceacademywa.org/" },
+      { logo: "logos/Achava_Cleaning_Services_LLC_logo.webp", name: "Achava Cleaning Services LLC", tagline: "Where spotless spaces meet divine service.", website: "https://achavacleaningco.com/" },
+      { logo: "logos/Alpha_Sharp_Design,_LLC_logo.webp", name: "Alpha Sharp Design, LLC", tagline: "Designs that cut through the noise.", website: "https://www.asdevpartners.com/about" },
+      { logo: "logos/Althas_Louisiana_Cajun_seasoning&spices_LLC_logo.png", name: "Althas Louisiana Cajun seasoning &spices LLC", tagline: "A taste of the bayou in every bite.", website: "https://althascajunspices.com" },
+      { logo: "logos/AxSM_Art_LLC_logo.png", name: "AxSM Art LLC", tagline: "Where expression meets motion and color.", website: "https://www.madespaceseattle.com/" },
+      { logo: "logos/B&M_Janitorial_LLC_logo.png", name: "B&M Janitorial LLC", tagline: "Clean today, confident tomorrow.", website: "https://bmcleaningservices.com/home" },
+      { logo: "logos/Baxters_Bottles_LLC_logo.png", name: "Baxters Bottles LLC", tagline: "Sustainable bottles built for better living.", website: "https://www.lucysbottleshop.com" },
+      { logo: "logos/Bet_Boon_SPC_logo.svg", name: "Bet Boon SPC", tagline: "Where coffee & culture meet", website: "https://www.boonboonacoffee.com/"},
+      { logo: "logos/Bite_Me_Inc_logo1.png", name: "Bite Me Inc.", tagline: "Bold flavor with a side of attitude.", website: "https://bitemeinc.cc/" },
+      { logo: "logos/Black_Brilliance_Research,_LLC_logo.png", name: "Black Brilliance Research, LLC", tagline: "Data with depth, insight with purpose.", website: "https://blackbrillianceresearch.com"},
+      { logo: "logos/BLASTography_LLC_logo.png", name: "BLASTography LLC", tagline: "Capturing energy one frame at a time.", website: "https://blastmusicfest.com" },
+      { logo: "logos/Blessential_Trucking_LLC_logo.png", name: "Blessential Trucking LLC", tagline: "Hauling essentials, delivering blessings.", website: "" },
+      { logo: "logos/BLKBRY_logo.png", name: "BLKBRY, LLC", tagline: "Luxury curated for the modern creative.", website: "https://www.blkbry.com" },
+      { logo: "logos/Campfire_Coffee,_LLC_logo.webp", name: "Campfire Coffee, LLC", tagline: "Gather, sip, and spark something new.", website: "https://www.welovecampfire.com" },
+      { logo: "logos/Cheddarboy_Popcorn_LLP_logo.webp", name: "Cheddarboy Popcorn LLP", tagline: "Crunchy, cheesy, dangerously addictive.", website: "https://www.realcheddarboypopcorn.com/" },
+      { logo: "logos/Cipro-Group_Logo.png", name: "Cipro LLC", tagline: "Engineering efficiency for modern business.", website: "https://ciprocontractors.com/" },
+      { logo: "logos/CJK-Community-Homes-LOGO.png", name: "CJK Homes and Design, LLC", tagline: "Building dreams with precision and passion.", website: "https://cjkcommunityhomes.org/" },
+      { logo: "", name: "CJK Property Management", tagline: "Managing your investments like our own.", website: "" },
+      { logo: "logos/Converge_Media_LLC_logo.webp", name: "Converge Media LLC", tagline: "Where culture, creativity, and conversation meet.", website: "https://www.whereweconverge.com/" },
+      { logo: "logos/Dopl_Technologies_Inc_logo.png", name: "Dopl Technologies Inc.", tagline: "Simplifying tech for real-world impact.", website: "https://www.dopltechnologies.com/" },
+      { logo: "logos/Dynamic_Waters_LLC_logo.webp", name: "Dynamic Waters LLC", tagline: "Flowing with innovation and integrity.", website: "https://www.dynamicwaters.net/about" },
+      { logo: "logos/Emerald_Water_Anglers_LLC_logo.png", name: "Emerald Water Anglers LLC", tagline: "Guiding you to greener streams and clearer minds.", website: "https://emeraldwateranglers.com/" },
+      { logo: "logos/FACE-Consulting-Collaborative_logo.webp", name: "FACE Consulting, LLC", tagline: "Turning vision into actionable strategy.", website: "https://faceconsultingcollaborative.com/" },
+      { logo: "logos/Faith_Finance_Center_LLC_logo.jpg", name: "Faith Finance Center LLC", tagline: "Where faith meets financial freedom.", website: "https://faithfinancecenter.mykajabi.com/" },
+      { logo: "logos/Freight_Link_LLC_logo.jpeg", name: "FREIGHT LINK LLC", tagline: "Connecting cargo to destinations, seamlessly.", website: "https://www.linkedin.com/company/freight-link-llc/" },
+      { logo: "logos/Gravelly_Lake_Townhomes_LLC_logo.webp", name: "Gravelly Lake Townhomes LLC", tagline: "Luxury living by nature's calm.", website: "https://www.gravellylakebrownstones.com/" },
+      { logo: "logos/Gravy_LLC_logo.webp", name: "Gravy LLC", tagline: "Making everything better, naturally.", website: "https://www.gravyvashon.com/" },
+      { logo: "logos/Harriet-Tubman-foundation_logo.png", name: "HARRIET TUBMAN FOUNDATION FOR SAFE PASSAGE", tagline: "Empowering freedom through safe journeys.", website: "https://harriettubmanfoundationforsafepassage.info/" },
+      { logo: "logos/HTM_Contracting_LLC_logo.png", name: "HTM Contracting LLC", tagline: "Building trust from the ground up.", website: "https://higherthanme.org/" },
+      { logo: "logos/Hudson_Trucking_and_Transportation_LLC_logo.webp", name: "Hudson Trucking and Transportation LLC", tagline: "Driving reliability across every route.", website: "https://www.hudsontransportation.us/" },
+      { logo: "logos/Hulk_Construction_LLC_logo.png", name: "Hulk Construction LLC", tagline: "Strength, precision, and results that last.", website: "https://www.hulk253.com/" },
+      { logo: "logos/Inspirational_Workshops_-_Brave_logo.png", name: "Inspirational Workshops", tagline: "Inspiring minds to lead, live, and thrive.", website: "https://www.braveyoungpeople.org/" },
+      { logo: "logos/IT-Community_Connection_LLC_logo.webp", name: "IT-Community Connection LLC", tagline: "Tech that bridges people and purpose.", website: "" },
+      { logo: "logos/J_J_Freemann_Construction_and_Painting,_LLC_logo.webp", name: "J J Freemann Construction and Painting, LLC", tagline: "Craftsmanship with every brush and brick.", website: "https://www.jjfreemann.com/" },
+      { logo: "logos/Jacobs_agro_LLC_logo.jpeg", name: "jacobs agro LLC", tagline: "Rooted in sustainability, growing for tomorrow.", website: "https://jacobsagro.com/" },
+      { logo: "logos/JUMPIN_JAMBALAYA_LLC_logo.jpg", name: "JUMPIN JAMBALAYA LLC", tagline: "Flavor that dances right on your plate.", website: "https://jumpinjambalaya.com/" },
+      { logo: "logos/Kyla_Care_Therapy_LLC_logo.png", name: "Kyla Care Therapy LLC", tagline: "Healing hearts, one session at a time.", website: "https://www.kylacaretherapy.com/" },
+      { logo: "logos/Len_Can_Builders,_Inc_logo.jpg", name: "Len Can Builders, Inc.", tagline: "Yes we can — and we build it better.", website: "https://www.lencanbuilders.com/" },
+      { logo: "logos/Lewismiller_LLC_logo.webp", name: "Lewismiller LLC", tagline: "Creative strategy built on legacy.", website: "https://www.fortheloveofsoulfood.com/" },
+      { logo: "", name: "LEWISMILLER2 LLC", tagline: "Twice the innovation, same trusted vision.", website: "" },
+      { logo: "logos/Lifestyle_LLC_logo.png", name: "Lifestyle LLC", tagline: "Curating comfort, class, and culture.", website: "https://www.lifestylevalet.net/" },
+      { logo: "", name: "Louis Rudolph Homes LLC", tagline: "Designing homes that tell your story.", website: "https://mbamemberzone.tacomawebsite.net/list/member/louis-rudolph-homes-4657" },
+      { logo: "logos/Lunar_Libations_LLC_revelry_logo.png", name: "Lunar Libations LLC", tagline: "Sip under the stars — taste the moonlight.", website: "https://jetcitylabs.com/revelry/" },
+      { logo: "logos/Made_Men_Cleaning_Services_LLC_logo.webp", name: "Made Men Cleaning Services LLC", tagline: "Cleaning with honor, precision, and pride.", website: "https://www.mademencs.com/" },
+      { logo: "logos/Mama_Row's_Caramel_Corp_logo.webp", name: "Mama Row's Caramel Corp", tagline: "Sweetness made from soul and legacy.", website: "https://www.mamarowscaramel.com/" },
+      { logo: "logos/Marvin_Thomas_Memorial_Fund_logo.png", name: "Marvin Thomas Memorial Fund", tagline: "Continuing the work that uplifts generations.", website: "https://marvinthomasmemorialfund.org/" },
+      { logo: "logos/Massage-Me-LOGO.png", name: "Massage ME LLC", tagline: "Relax. Release. Renew.", website: "https://canyonplacemassage.me/" },
+      { logo: "logos/Mediums_Collective_logo.webp", name: "Mediums LLC", tagline: "Where art and intuition meet business.", website: "https://mediumscollective.com/" },
+      { logo: "logos/MENTOR_SEATTLE_INC_logo.png", name: "MENTOR SEATTLE INC", tagline: "Guiding leaders. Growing legacies.", website: "https://mentorseattleinc.com/" },
+      { logo: "", name: "Mentor Seattle, Inc", tagline: "Empowering minds through mentorship and momentum.", website: "" },
+      { logo: "logos/Midan_African_market_logo.jpg", name: "MIDAN INVESTMENTS AND COMPANY INC", tagline: "Investing in innovation with integrity.", website: "https://www.instagram.com/midan_african_market/" },
+      { logo: "logos/MLK_Commissary_LLC_logo.png", name: "MLK Commissary LLC", tagline: "Where community and commerce connect.", website: "https://www.seattlecommissary.com/" },
+      { logo: "logos/Mr._Naturalz_LLC_logo.webp", name: "Mr. Naturalz LLC", tagline: "Naturally confident. Authentically you.", website: "https://www.mrnaturalz.com/" },
+      { logo: "logos/Najfahn_LLC_logo.jpg", name: "Najfahn LLC", tagline: "Innovation born from cultural brilliance.", website: "https://www.najfahncarcafe.com/" },
+      { logo: "logos/Nathan_Webster_&_Associates,_LLC_logo.jpg", name: "Nathan Webster & Associates, LLC", tagline: "Helping brands grow with purpose.", website: "https://nwebsterllc.com/" },
+      { logo: "logos/New_Leaf_Chiropractic_Wellness_logo.png", name: "New Leaf Chiropractic & Wellness P.S.", tagline: "Turn over a new leaf in your health journey.", website: "https://www.newleafhealthclinic.com/" },
+      { logo: "logos/Noir_Lux_Candle_Co._LLC_logo.svg", name: "Noir Lux Candle Co. LLC", tagline: "Luxury that lights up your mood.", website: "https://noirluxcandleco.com/" },
+      { logo: "logos/On_Blended_Knee_Winery_LLC_logo.webp", name: "On Blended Knee Winery LLC", tagline: "Where passion is poured in every glass.", website: "https://obkwinery.com/" },
+      { logo: "logos/ONE_VIBE_MEDIA_LLC_logo.jpg", name: "ONE VIBE MEDIA LLC", tagline: "Amplifying the culture, one story at a time.", website: "https://onevibemedia.com/" },
+      { logo: "logos/Osmosis_Media_LLC_logo.png", name: "Osmosis Media LLC", tagline: "Creativity that seeps into every channel.", website: "https://osmosismedia.com/" },
+      { logo: "logos/Pan_African_Center_for_Empowerment_logo1.jpg", name: "PACIFIC NORTHWEST ONE STOP SHOP", tagline: "Your all-in-one hub for local excellence.", website: "https://www.yelp.com/biz/pacific-northwest-1-stop-shop-everett#location-and-hours" },
+      { logo: "", name: "Pan African Center for Empowerment", tagline: "Uniting roots. Igniting power.", website: "https://www.getonpace.org/" },
+      { logo: "logos/Party_House_logo.png", name: "Party House", tagline: "Where every night is the main event.", website: "https://partyhousetacoma.com/" },
+      { logo: "logos/Pinckney_Cookie_Cafe_Inc_logo.webp", name: "Pinckney Cookie Cafe Inc.", tagline: "Cookies so good, they deserve applause.", website: "https://lovethesecookies.com/" },
+      { logo: "logos/PJ's_Classic_Homemade_Ice_Cream_logo.jpeg", name: "PJ's Classic Homemade Ice Cream & Bon Bons, LLC", tagline: "Handcrafted happiness in every scoop.", website: "https://www.yelp.com/biz/pjs-classic-creamery-seattle" },
+      { logo: "", name: "Pleasant Holdings, LLC", tagline: "Investing in better tomorrows.", website: "https://www.linkedin.com/in/kennypleasant/" },
+      { logo: "logos/Professional_Women_of_Color_Network_logo.png", name: "Professional Women of Color Network,  LLC", tagline: "Empowering women to lead boldly.", website: "https://pwocn.wildapricot.org/" },
+      { logo: "logos/Qemem_Hot_Sauce_LLC_logo.webp", name: "Qemem Hot Sauce LLC", tagline: "The fire your food's been missing.", website: "https://www.qememhotsauce.com/" },
+      { logo: "logos/Quality_Development_LLC_logo.png", name: "Quality Development LLC", tagline: "Developing excellence from the ground up.", website: "https://www.qualitydevelopment.biz/" },
+      { logo: "logos/Queencare_Products_LLC_logo.webp", name: "Queencare Products LLC", tagline: "Royal care for radiant queens.", website: "https://www.queencareproducts.com/" },
+      { logo: "logos/Remy_Construction_LLC_logo.svg", name: "Remy Construction, LLC", tagline: "Building visions into reality.", website: "https://www.rainiercustomhomes.com/" },
+      { logo: "logos/REVIVING_PATH_COUNSELING_logo.png", name: "REVIVING PATH COUNSELING & CONSULTING PLLC", tagline: "Guiding you toward renewal and peace.", website: "https://rpathcc.com/" },
+      { logo: "", name: "Rich Port Industries LLC", tagline: "Where quality meets global reach.", website: "" },
+      { logo: "logos/Richlandhub_LLC_logo.webp", name: "Richlandhub LLC", tagline: "Connecting business, innovation, and growth.", website: "https://richlandhub.com/" },
+      { logo: "logos/RiteSize_Consulting_LLC_logo.webp", name: "RiteSize Consulting LLC", tagline: "Right insights. Right solutions. Right size.", website: "https://www.ritesize.co/" },
+      { logo: "", name: "Roccarosso LLC", tagline: "Passion-driven design, made to inspire.", website: "https://www.dnb.com/business-directory/company-profiles.roccarosso_llc.86042307afebe25006d30ba58d1dadcf.html" },
+      { logo: "", name: "SDG Pacific Inc", tagline: "Sustainable development for a brighter Pacific.", website: "https://www.bbb.org/us/wa/snoqualmie/profile/dry-cleaners/sdg-pacific-inc-1296-1000149363" },
+      { logo: "logos/Serenity_Financial_Consultant_LLC_logo.png", name: "Serenity Financial Consultant LLC", tagline: "Calm minds, confident money moves.", website: "https://www.serenityfsgroup.com/" },
+      { logo: "logos/Siren_Curves_Body_Sculpting_LLC_logo.jpg", name: "Siren Curves Body Sculpting LLC", tagline: "Confidence sculpted to perfection.", website: "https://www.sirencurves.com/" },
+      { logo: "logos/Snapshot_LLC_logo.png", name: "Snapshot LLC", tagline: "Moments frozen in perfect clarity.", website: "https://www.facebook.com/snapshotcollective/" },
+      { logo: "logos/SoNu_Beauty_Bar_INC_logo.png", name: "SoNu Beauty Bar INC", tagline: "So natural. So new. So you.", website: "https://sonubeautybar.com/" },
+      { logo: "logos/Sound_Sports_Performance_and_Training_LLC_logo.webp", name: "Sound Sports Performance and Training LLC", tagline: "Train hard. Move smart. Win soundly.", website: "https://soundsportsperformance.com/" },
+      { logo: "", name: "Spiddit Media Group Inc.", tagline: "Spinning stories that stick.", website: "https://www.dnb.com/business-directory/company-profiles.spiddit_media_group_inc.04a5cae6a1702b79bf5dc361ad37dcd8.html" },
+      { logo: "logos/SpoonFed_Training_LLC.png", name: "SpoonFed Training LLC", tagline: "Feeding your potential, one skill at a time.", website: "https://www.spoonfedtraining.com/" },
+      { logo: "logos/Stemtac,_LLC_logo.png", name: "Stemtac, LLC", tagline: "STEM innovation with tactical precision.", website: "https://www.stemtacfoundation.org/" },
+      { logo: "logos/Surety_Security,_LLC_logo.webp", name: "Surety Security, LLC", tagline: "Your safety, our commitment.", website: "https://www.suretysecuritypnw.com/" },
+      { logo: "logos/Tanimola_logistics_LLC_logo.png", name: "Tanimola logistics limited liability company", tagline: "Delivering trust across every mile.", website: "https://www.instagram.com/p/DF0hSqpsmy2/" },
+      { logo: "logos/TASWIRA_LLC_logo.png", name: "TASWIRA LLC", tagline: "Picture the future. Then build it.", website: "https://taswira.org/" },
+      { logo: "logos/The_Postman_LLC_logo.png", name: "The Postman LLC", tagline: "Delivering stories worth opening.", website: "https://www.facebook.com/thepostmanseattle/" },
+      { logo: "logos/The_Silent_Task_Force_logo.png", name: "The Silent Task Force", tagline: "Working quietly. Impacting loudly.", website: "https://www.thesilenttaskforce.org/" },
+      { logo: "logos/Thompson_Electrical_Services_LLC_logo.png", name: "Thompson Electrical Services LLC", tagline: "Powering progress with precision.", website: "https://thompsonelectricalservices.com/" },
+      { logo: "logos/Thoughts_Cost_LLC_logo.png", name: "Thoughts Cost LLC", tagline: "Ideas worth every penny.", website: "https://www.thoughtscost.com/" },
+      { logo: "logos/Timu_Marketing_Agency,_LLC_logo.png", name: "Timu Marketing Agency, LLC", tagline: "Marketing that moves communities forward.", website: "https://timumarketing.com/" },
+      { logo: "logos/TWB_Consulting_LLC_logo.png", name: "TWB Consulting LLC", tagline: "Strategic insight for sustainable success.", website: "https://www.consulttwb.com/" },
+      { logo: "logos/Umami_kushi_LLC_logo.jpeg", name: "Umami Kushi llc", tagline: "Savory bites with global soul.", website: "https://umamikushi.com/" },
+      { logo: "logos/Urban_Connoisseurs,_LLC_logo.png", name: "Urban Connoisseurs, LLC", tagline: "Curating culture for the refined palate.", website: "https://www.urbanconnoisseurs.com/" },
+      { logo: "logos/Urban_Hills_Group_LLC_logo.png", name: "Urban Hills Group LLC", tagline: "Rising communities. Built with care.", website: "https://www.urbanhig.org/" },
+      { logo: "", name: "Vacancy Services LLC", tagline: "Filling spaces with opportunity.", website: "https://www.yelp.com/biz/vacancy-services-tacoma-2" },
+      { logo: "logos/Village_Life_Project_logo.webp", name: "Village Life Project", tagline: "Building stronger communities, one family at a time.", website: "https://www.villagelifeproject.org/" },
+      { logo: "logos/VULGAR-DREAMER_logo.jpg", name: "Vulgar Dreamer", tagline: "Art unapologetic. Vision untamed.", website: "https://vulgardreamer.com/" },
+      { logo: "logos/Wembo_CPA_PLLC_logo.png", name: "Wembo CPA PLLC", tagline: "Your numbers. Our expertise.", website: "https://www.wembocpa.com/" },
+      { logo: "logos/Where_is_Neva_LLC_logo.png", name: "Where is Neva LLC", tagline: "A creative search for what's next.", website: "https://www.whereisneva.com/" },
+      { logo: "logos/Wonder_of_Women_International_PC_logo.png", name: "Wonder of Women International PC", tagline: "Celebrating womanhood, worldwide.", website: "https://www.thewonderofwomen.org/" },
+      { logo: "", name: "YOKED", tagline: "Strength. Unity. Progress.", website: "https://www.instagram.com/p/C7_7OqQJt87/" },
+      { logo: "", name: "Yushang llc", tagline: "Tradition meets modern flavor.", website: "https://www.overtherainbowteabar.com/" },
+      { logo: "", name: "Zebra Commercial Solutions Inc", tagline: "Distinctive solutions for a striped market.", website: "https://vanessazamy.com/" }
+    ];
+
+    const generateSampleBusinesses = () => {
+      const businessesArray = [];
+      const industries = Object.keys(INDUSTRIES);
+      const affinitiesKeys = Object.keys(AFFINITIES);
+
+      for (let i = 0; i < names.length; i++) {
+        const business = names[i];
+        const industry = industries[Math.floor(Math.random() * industries.length)];
+        const affinities = [];
+        if (Math.random() > 0.5) affinities.push(affinitiesKeys[Math.floor(Math.random() * affinitiesKeys.length)]);
+
+        businessesArray.push({
+          id: i + 1,
+          name: business.name,
+          logo: business.logo,
+          tagline: business.tagline,
+          website: business.website,
+          industry,
+          affinities
+        });
+      }
+
+      return businessesArray;
+    };
+
+    const BusinessCard = ({ business }) => {
+      const [isFlipped, setIsFlipped] = useState(false);
+
+      return (
+        <div 
+          className={`flip-card w-full aspect-square cursor-pointer ${isFlipped ? 'flipped' : ''}`}
+          onClick={() => setIsFlipped(!isFlipped)}
+        >
+          <div className="flip-card-inner">
+            {/* FRONT - Logo */}
+            <div className="flip-card-front bg-white rounded-lg shadow-lg border-2 border-gray-200 flex items-center justify-center p-4 hover:shadow-xl transition-shadow">
+              {business.logo ? (
+                <img
+                  src={business.logo}
+                  alt={`${business.name} logo`}
+                  className="max-w-[90%] max-h-[90%] object-contain"
+                  draggable="false"
+                />
+              ) : (
+                <div className="text-center px-2">
+                  <h3 className="font-bold text-sm text-gray-800 leading-tight">
+                    {business.name}
+                  </h3>
+                </div>
+              )}
+            </div>
+
+            {/* BACK - Details */}
+            <div className="flip-card-back bg-gradient-to-br from-white to-gray-50 rounded-lg shadow-lg border-2 border-gray-200 p-4 flex flex-col">
+              <div className="flex-1 flex flex-col justify-between">
+                <div>
+                  <h3 className="font-bold text-sm text-gray-900 mb-1 leading-tight">
+                    {business.name}
+                  </h3>
+                  
+                  <p className="text-xs text-gray-600 italic mb-2 line-clamp-2">
+                    {business.tagline}
+                  </p>
+
+                  <div className="mb-2">
+                    <span
+                      className="inline-block px-2 py-0.5 text-xs font-medium text-white rounded"
+                      style={{ backgroundColor: INDUSTRIES[business.industry] }}
+                    >
+                      {business.industry}
+                    </span>
+                  </div>
+
+                  {business.affinities?.length > 0 && (
+                    <div className="flex flex-wrap gap-1 mb-2">
+                      {business.affinities.map((aff, idx) => (
+                        <span
+                          key={idx}
+                          className="px-2 py-0.5 text-xs text-white rounded-full"
+                          style={{ backgroundColor: AFFINITIES[aff] }}
+                        >
+                          {aff}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {business.website && (
+                  <a
+                    href={business.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1 text-xs text-blue-600 hover:text-blue-800 font-medium mt-auto"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <Globe size={12} />
+                    Visit Website
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    const BusinessQuilt = () => {
+      const [businesses] = useState(generateSampleBusinesses());
+      const [selectedIndustry, setSelectedIndustry] = useState(null);
+      const [selectedAffinities, setSelectedAffinities] = useState([]);
+
+      const filteredBusinesses = useMemo(() => {
+        return businesses.filter(business => {
+          const industryMatch = !selectedIndustry || business.industry === selectedIndustry;
+          const affinityMatch = selectedAffinities.length === 0 ||
+            selectedAffinities.every(aff => business.affinities.includes(aff));
+          return industryMatch && affinityMatch;
+        });
+      }, [businesses, selectedIndustry, selectedAffinities]);
+
+      const toggleAffinity = (aff) => {
+        setSelectedAffinities(prev =>
+          prev.includes(aff) ? prev.filter(a => a !== aff) : [...prev, aff]
+        );
+      };
+
+      return (
+        <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-4 sm:p-6">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-6">
+              <h1 className="text-4xl font-bold text-gray-800 mb-2">Business Quilt</h1>
+              <p className="text-gray-600">Discover local businesses in our community — click to flip!</p>
+            </div>
+
+            {/* Filters */}
+            <div className="bg-[#2F4F3E] rounded-lg shadow-md p-4 mb-6">
+              <div className="flex flex-wrap gap-3 items-center">
+                <select
+                  value={selectedIndustry || ''}
+                  onChange={(e) => setSelectedIndustry(e.target.value || null)}
+                  className="border rounded px-3 py-2 text-sm bg-white"
+                >
+                  <option value="">All Industries</option>
+                  {Object.keys(INDUSTRIES).map(ind => (
+                    <option key={ind} value={ind}>{ind}</option>
+                  ))}
+                </select>
+
+                <select
+                  value=""
+                  onChange={(e) => {
+                    if (e.target.value) { toggleAffinity(e.target.value); e.target.value = ''; }
+                  }}
+                  className="border rounded px-3 py-2 text-sm bg-white"
+                >
+                  <option value="">Filter Affinity</option>
+                  {Object.keys(AFFINITIES).map(aff => (
+                    <option key={aff} value={aff}>{aff}</option>
+                  ))}
+                </select>
+
+                {(selectedIndustry || selectedAffinities.length > 0) && (
+                  <button
+                    onClick={() => { setSelectedIndustry(null); setSelectedAffinities([]); }}
+                    className="text-sm text-white hover:text-gray-200 underline"
+                  >
+                    Clear all filters
+                  </button>
+                )}
+              </div>
+
+              {selectedAffinities.length > 0 && (
+                <div className="flex flex-wrap gap-2 mt-3">
+                  {selectedAffinities.map(aff => (
+                    <span key={aff}
+                      className="px-3 py-1 rounded-full text-white text-xs flex items-center gap-2"
+                      style={{ backgroundColor: AFFINITIES[aff] }}
+                    >
+                      {aff}
+                      <button onClick={() => toggleAffinity(aff)} className="hover:opacity-80">
+                        <X size={14} />
+                      </button>
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Quilt Grid */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 bg-[#355E3B] p-6 rounded-xl shadow-xl">
+              {filteredBusinesses.map(business => (
+                <BusinessCard key={business.id} business={business} />
+              ))}
+            </div>
+
+            {filteredBusinesses.length === 0 && (
+              <div className="text-center py-12 text-gray-500">
+                No businesses match your filters.
+              </div>
+            )}
+          </div>
+        </div>
+      );
+    };
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<BusinessQuilt />);
+  </script>
+</body>
+</html>
