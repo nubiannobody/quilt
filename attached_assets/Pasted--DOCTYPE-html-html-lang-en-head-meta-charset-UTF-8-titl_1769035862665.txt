@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Business Quilt</title>
+  <title>Bricks Not Sticks</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script type="module">
     import * as lucide from 'https://cdn.skypack.dev/lucide-react';
@@ -56,11 +56,11 @@
     };
 
     const AFFINITIES = {
-      'Women Owned': '#E91E63',
-      'Black Owned': '#8B4513',
-      'LGBTQIA+ Owned': '#9C27B0',
-      'Veteran Owned': '#1565C0',
-      'Shop In Person': '#F57C00'
+      'Women Owned': '#FCBD25',
+      'Black Owned': '#3E392F',
+      'LGBTQIA+ Owned': '#7FA56B',
+      'Veteran Owned': '#BF8F60',
+      'Shop In Person': '#0E4B3B'
     };
 
     const names = [

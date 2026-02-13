@@ -31,108 +31,139 @@ export function BusinessCard({ business }: BusinessCardProps) {
         className="relative h-full w-full preserve-3d shadow-sm hover:shadow-md transition-shadow duration-300 rounded-xl"
         style={{ transformStyle: "preserve-3d" }}
       >
-        {/* Front of Card */}
-        <div 
-          className="absolute inset-0 backface-hidden rounded-xl overflow-hidden bg-white border border-border/50 flex flex-col items-center justify-center p-6 text-center"
-          style={{ backfaceVisibility: "hidden" }}
-        >
-          {/* Industry Banner Top */}
-          <div 
-            className="absolute top-0 left-0 right-0 h-2 w-full" 
-            style={{ backgroundColor: industryColor }}
-          />
+{/* Front of Card */}
+<div 
+  className="absolute inset-0 backface-hidden rounded-xl overflow-hidden bg-[#ECE7DF] border border-border/50 flex flex-col items-center p-6 text-center"
+  style={{ backfaceVisibility: "hidden" }}
+>
+  {/* Industry Banner Top */}
+  <div 
+    className="absolute top-0 left-0 right-0 h-2 w-full" 
+    style={{ backgroundColor: industryColor }}
+  />
 
-          <div className="flex-1 flex flex-col items-center justify-center gap-4">
-            {hasLogo ? (
-              <div className="relative w-24 h-24 flex items-center justify-center mb-2">
-                <img 
-                  src={business.logo} 
-                  alt={`${business.name} logo`}
-                  className="max-w-full max-h-full object-contain drop-shadow-sm"
-                  onError={(e) => {
-                    e.currentTarget.style.display = 'none';
-                    e.currentTarget.parentElement?.classList.add('bg-muted', 'rounded-full', 'p-4');
-                  }}
-                />
-              </div>
-            ) : (
-              <div className="w-20 h-20 rounded-full bg-muted flex items-center justify-center mb-2 text-3xl font-display font-bold text-muted-foreground/50">
-                {business.name.charAt(0)}
-              </div>
-            )}
-            
-            <h3 className="font-display font-bold text-lg leading-tight line-clamp-2">
-              {business.name}
-            </h3>
-            
-            <Badge variant="secondary" className="text-xs font-normal bg-muted/50 text-muted-foreground">
-              {business.industry}
-            </Badge>
-          </div>
-          
-          <div className="mt-auto pt-2">
-            <span className="text-xs text-muted-foreground/70 font-medium uppercase tracking-wider">
-              Click to details
-            </span>
-          </div>
-        </div>
-
-        {/* Back of Card */}
-        <div 
-          className="absolute inset-0 backface-hidden rounded-xl overflow-hidden bg-white border border-border/50 p-6 flex flex-col shadow-inner"
+  {/* Logo row – improved sizing for readability */}
+  <div className="pt-1 flex justify-center items-center" style={{ height: "112px" }}>
+    {hasLogo ? (
+      <div className="relative w-full h-full flex items-center justify-center px-6">
+        <img 
+          src={business.logo} 
+          alt={`${business.name} logo`}
+          className="max-w-full max-h-full w-auto h-auto object-contain"
           style={{ 
-            backfaceVisibility: "hidden", 
-            transform: "rotateY(180deg)" 
+            maxHeight: "96px",
+            maxWidth: "160px"
           }}
+          onError={(e) => {
+            e.currentTarget.style.display = "none";
+            const parent = e.currentTarget.parentElement;
+            if (parent) {
+              parent.innerHTML = `<div class="w-24 h-24 rounded-full bg-muted flex items-center justify-center text-3xl font-display font-bold text-muted-foreground/50">${business.name.charAt(0)}</div>`;
+            }
+          }}
+        />
+      </div>
+    ) : (
+      <div className="w-24 h-24 rounded-full bg-muted flex items-center justify-center text-3xl font-display font-bold text-muted-foreground/50">
+        {business.name.charAt(0)}
+      </div>
+    )}
+  </div>
+
+  {/* Name + Industry */}
+  <div className="mt-2 flex flex-col items-center gap-2">
+    <h3 className="font-display font-bold text-lg leading-tight line-clamp-2 px-2">
+      {business.name}
+    </h3>
+
+    <Badge
+      variant="secondary"
+      className="text-xs font-normal bg-[#FCBD25]"
+    >
+      {business.industry}
+    </Badge>
+  </div>
+
+  {/* Footer */}
+  <div className="mt-auto pt-2 pb-1">
+    <span className="text-xs text-[#141414] font-medium uppercase tracking-wider">
+      About Us
+    </span>
+  </div>
+</div>
+
+
+{/* Back of Card */}
+<div
+  className="absolute inset-0 backface-hidden rounded-xl overflow-hidden bg-[#F2EFEA] border border-border/50 p-5 flex flex-col shadow-inner"
+  style={{
+    backfaceVisibility: "hidden",
+    transform: "rotateY(180deg)",
+  }}
+>
+  <div
+    className="absolute top-0 left-0 right-0 h-1 w-full opacity-50"
+    style={{ backgroundColor: industryColor }}
+  />
+
+  {/* Header */}
+  <div className="flex justify-between items-start gap-3 mb-2">
+    <h3 className="font-display font-bold text-base leading-tight text-left line-clamp-2">
+      {business.name}
+    </h3>
+
+    <div
+      className="w-3 h-3 rounded-full shrink-0 mt-1"
+      style={{ backgroundColor: industryColor }}
+      title={business.industry}
+    />
+  </div>
+
+  {/* Tagline - fixed height container to prevent jumping */}
+  <div className="mb-3" style={{ minHeight: "32px" }}>
+    <p className="text-xs text-muted-foreground italic leading-relaxed line-clamp-2">
+      {business.tagline}
+    </p>
+  </div>
+
+  {/* Affinities - fixed height container for consistency */}
+  <div className="mb-3" style={{ minHeight: "48px", maxHeight: "48px", overflow: "hidden" }}>
+    <div className="flex flex-wrap gap-1.5">
+      {business.affinities.slice(0, 6).map((affinity) => (
+        <Badge
+          key={affinity}
+          variant="outline"
+          className="text-[10px] px-1.5 py-0.5 h-auto border-dashed"
         >
-          <div 
-            className="absolute top-0 left-0 right-0 h-1 w-full opacity-50" 
-            style={{ backgroundColor: industryColor }}
-          />
-          
-          <div className="flex justify-between items-start mb-4">
-            <h3 className="font-display font-bold text-lg leading-tight text-left">
-              {business.name}
-            </h3>
-            {/* Industry Dot */}
-            <div 
-              className="w-3 h-3 rounded-full shrink-0 mt-1.5"
-              style={{ backgroundColor: industryColor }} 
-              title={business.industry}
-            />
-          </div>
+          {affinity}
+        </Badge>
+      ))}
 
-          <p className="text-sm text-muted-foreground mb-6 italic leading-relaxed">
-            "{business.tagline}"
-          </p>
-
-          <div className="mt-auto space-y-4">
-            <div className="flex flex-wrap gap-1.5">
-              {business.affinities.map((affinity) => (
-                <Badge 
-                  key={affinity} 
-                  variant="outline" 
-                  className="text-[10px] px-1.5 py-0.5 h-auto border-dashed"
-                >
-                  {affinity}
-                </Badge>
-              ))}
-            </div>
-
-            {business.website && (
-              <Button 
-                asChild 
-                className="w-full gap-2 text-xs h-8 bg-slate-900 hover:bg-slate-800 text-white"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <a href={business.website} target="_blank" rel="noopener noreferrer">
-                  Visit Website <ExternalLink className="w-3 h-3" />
-                </a>
-              </Button>
-            )}
-          </div>
-        </div>
-      </motion.div>
+      {business.affinities.length > 6 && (
+        <Badge
+          variant="secondary"
+          className="text-[10px] px-1.5 py-0.5 h-auto bg-muted/60 text-muted-foreground"
+        >
+          +{business.affinities.length - 6}
+        </Badge>
+      )}
     </div>
-  );
+  </div>
+
+  {/* CTA pinned, always visible */}
+  {business.website && (
+    <Button
+      asChild
+      className="mt-auto w-full gap-2 text-xs h-8 hover:bg-slate-800 text-white"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <a href={business.website} target="_blank" rel="noopener noreferrer">
+        Visit Website <ExternalLink className="w-3 h-3" />
+      </a>
+    </Button>
+  )}
+</div>
+</motion.div>
+</div>
+);
 }
