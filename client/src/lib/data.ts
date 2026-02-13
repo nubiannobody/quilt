@@ -24,7 +24,7 @@ export const AFFINITIES = {
 } as const;
 
 export const LOAN_YEARS = [
-   2023, 2024, 2025, 2026
+   2021, 2022, 2023, 2024, 2025, 2026
 ] as const;
 
 export type LoanYear = typeof LOAN_YEARS[number];
@@ -397,6 +397,17 @@ export const BUSINESSES: Business[] = [
 },
 
 { 
+  id: 'inclusive-data',
+  logo: "logos/InclusivedataLLC-logo.png", 
+  name: "Inclusive Data LLC", 
+  tagline: "Data that represents everyone. Insight that moves everyone.", 
+  website: "https://inclusivedatasolutions.com/",
+  industry: "Investment Technology",
+  affinities: [],
+  loanYear: 2021
+},
+
+{ 
   id: 'inspirational',
   logo: "logos/Inspirational_Workshops_Brave_logo.png", 
   name: "Inspirational WorkViews", 
@@ -420,13 +431,24 @@ export const BUSINESSES: Business[] = [
 
 { 
   id: 'infinite-llc',
-  logo: "logos/Infinite_LLC_logo.jpg", 
+  logo: "logos/InfiniteLLC_logo.jpg", 
   name: "Infinite LLC", 
   tagline: "Expanding vision. Scaling success.", 
   website: "https://www.instagram.com/infinite.llc/",
   industry: "Business Consulting",
   affinities: [],
   loanYear: 2025
+},
+
+{ 
+  id: 'jacob-willard-home',
+  logo: "logos/JacobWillard_Home_logo.png", 
+  name: "Jacob Willard Home", 
+  tagline: "Where craftsmanship meets timeless comfort.", 
+  website: "https://www.instagram.com/jacobwillardhome/?hl=en",
+  industry: "Retail",
+  affinities: [],
+  loanYear: 2021
 },
 
 { 
@@ -683,6 +705,16 @@ export const BUSINESSES: Business[] = [
 },
 
 { 
+  id: 'pot-pie-factory',
+  logo: "logos/PotPieFactoryInc_Logo_sm.webp", 
+  name: "Pot Pie Factory Inc.", 
+  tagline: "Handcrafted comfort in every golden crust.", 
+  website: "https://www.potpiefactory.co/",
+  industry: "Food + Beverage",
+  affinities: [],
+  loanYear: 2022
+},
+{ 
   id: 'professional-women',
   logo: "logos/Professional_Women_of_Color_Network_logo.png", 
   name: "Professional Women of Color Network", 
@@ -691,6 +723,28 @@ export const BUSINESSES: Business[] = [
   industry: "Professional Services",
   affinities: ["Women Owned", "Black Owned"],
   loanYear: 2025
+},
+
+{ 
+  id: 'prostasia-security',
+  logo: "", 
+  name: "Prostasia Security, LLC", 
+  tagline: "Protection without compromise.", 
+  website: "https://www.bizprofile.net/wa/mountlake-terrace/prostasia-security-llc",
+  industry: "Security Services",
+  affinities: [],
+  loanYear: 2025
+},
+
+{ 
+  id: 'rosemore-property-management',
+  logo: "logos/RosemoreProperty_Management_logo.png", 
+  name: "Rosemore Property Management", 
+  tagline: "Elevating spaces with care and precision.", 
+  website: "https://www.instagram.com/rosemorepropertymanagement/",
+  industry: "Professional Services",
+  affinities: [],
+  loanYear: 2021
 },
 
 { 
@@ -878,6 +932,17 @@ export const BUSINESSES: Business[] = [
   industry: "Arts + Entertainment",
   affinities: ["Black Owned"],
   loanYear: 2024
+},
+
+{ 
+  id: 'the-barbeque-pit',
+  logo: "logos/The_Barbeque_Pit_logo.png", 
+  name: "The Barbeque Pit", 
+  tagline: "Slow smoked. Bold flavor. No shortcuts.", 
+  website: "https://www.facebook.com/thebarbequepitseattle/",
+  industry: "Food + Beverage",
+  affinities: [],
+  loanYear: 2022
 },
 
 { 
