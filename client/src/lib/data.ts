@@ -1,25 +1,26 @@
 export const INDUSTRIES = {
-  'Food + Beverage': '#BF8F60',        // warm caramel
-  'Arts + Entertainment': '#F2DFB6',   // soft parchment
-  'Health + Beauty': '#7FA56B',        // sage green
-  'Professional Services': '#3E392F',  // deep olive-charcoal
-  'Transportation': '#141414',         // near-black
-  'Construction': '#8C6A4F',            // walnut brown (NEW)
-  'Retail': '#5A5F55',                 // warm off-white
-  'Investment Technology': '#0E4B3B',  // deep evergreen (trust/wealth/tech)
-  'Education': '#FCBD25',              // golden warmth (growth/learning)
-  'Business Consulting': '#3E392F',    // grounded authority (matches prof services)
-  'Security Services': '#141414',      // strong + protective (matches transportation)
-  'Content + Photos Creator': '#F2DFB6', // clean creative neutral (matches arts)
+  'Arts + Entertainment': '#F2DFB6',      // soft parchment
+  'Business Consulting': '#3E392F',       // grounded authority
+  'Construction': '#8C6A4F',              // walnut brown
+  'Content + Photos Creator': '#F2DFB6',  // clean creative neutral
+  'Education': '#FCBD25',                 // golden warmth
+  'Food + Beverage': '#BF8F60',           // warm caramel
+  'Health + Beauty': '#7FA56B',           // sage green
+  'Investment Technology': '#0E4B3B',     // deep evergreen
+  'Professional Services': '#3E392F',     // deep olive-charcoal
+  'Retail': '#5A5F55',                    // warm off-white
+  'Security Services': '#141414',         // near-black
+  'Transportation': '#141414',            // near-black
+  'Web Development': '#FFB98A',           // warm peach
 } as const;
 
 
 export const AFFINITIES = {
-  'Women Owned': '#BF8F60',
   'Black Owned': '#F2DFB6',
   'LGBTQIA+ Owned': '#3E392F',
   'Veteran Owned': '#7FA56B',
   'View In Person': '#F5A623',
+  'Women Owned': '#BF8F60',
 } as const;
 
 export const LOAN_YEARS = [
@@ -536,6 +537,17 @@ export const BUSINESSES: Business[] = [
   industry: "Professional Services",
   affinities: ["Black Owned", "Veteran Owned"],
   loanYear: 2025
+},
+
+{ 
+  id: 'mahogany-mango',
+  logo: "logos/mango5.png", 
+  name: "Mahogany & Mango", 
+  tagline: "From your head to the web.", 
+  website: "https://www.mahoganyandmango.com/",
+  industry: "Web Development",
+  affinities: ["Black Owned", "Women Owned"],
+  loanYear: 2026
 },
 
 { 
