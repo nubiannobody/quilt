@@ -1,4 +1,3 @@
-
 export const INDUSTRIES = {
   'Food + Beverage': '#BF8F60',        // warm caramel
   'Arts + Entertainment': '#F2DFB6',   // soft parchment
@@ -51,7 +50,7 @@ export const BUSINESSES: Business[] = [
   tagline: "Innovating capital. Engineering opportunity.", 
   website: "https://www.3dventures.com/",
   industry: "Investment Technology",
-  affinities: [],
+  affinities: ["Black Owned", "Women Owned"],
   loanYear: 2025
 },
 
@@ -73,7 +72,7 @@ export const BUSINESSES: Business[] = [
   tagline: "Growing bright minds from the very beginning.", 
   website: "https://www.a4applelearningcenter.org/",
   industry: "Education",
-  affinities: [],
+  affinities: ["Black Owned", "Women Owned", "View In Person"],
   loanYear: 2025
 },
 
@@ -403,7 +402,7 @@ export const BUSINESSES: Business[] = [
   tagline: "Data that represents everyone. Insight that moves everyone.", 
   website: "https://inclusivedatasolutions.com/",
   industry: "Investment Technology",
-  affinities: [],
+  affinities: ["Black Owned", "Women Owned"],
   loanYear: 2021
 },
 
@@ -420,12 +419,12 @@ export const BUSINESSES: Business[] = [
 
 { 
   id: 'intentions-juice',
-  logo: "", 
+  logo: "logos/IntentionsJuice SmoothieBarLLC_logo.png", 
   name: "Intentions Juice & Smoothie Bar LLC", 
   tagline: "Fuel your body. Feed your purpose.", 
   website: "https://www.intentionsjuicebar.com/",
   industry: "Food + Beverage",
-  affinities: [],
+  affinities: ["Black Owned", "Women Owned", "View In Person"],
   loanYear: 2026
 },
 
@@ -436,7 +435,7 @@ export const BUSINESSES: Business[] = [
   tagline: "Expanding vision. Scaling success.", 
   website: "https://www.instagram.com/infinite.llc/",
   industry: "Business Consulting",
-  affinities: [],
+  affinities: ["Black Owned"],
   loanYear: 2025
 },
 
@@ -447,7 +446,7 @@ export const BUSINESSES: Business[] = [
   tagline: "Where craftsmanship meets timeless comfort.", 
   website: "https://www.instagram.com/jacobwillardhome/?hl=en",
   industry: "Retail",
-  affinities: [],
+  affinities: ["Black Owned"],
   loanYear: 2021
 },
 
@@ -508,7 +507,7 @@ export const BUSINESSES: Business[] = [
 
 { 
   id: 'lifestyle',
-  logo: "logos/Lifestyle_LLC_logo.png", 
+  logo: "logos/Lifestyle LLC_logo.png", 
   name: "Lifestyle LLC", 
   tagline: "Curating comfort, class, and culture.", 
   website: "https://www.lifestylevalet.net/",
@@ -607,7 +606,7 @@ export const BUSINESSES: Business[] = [
 
 { 
   id: 'noir-lux',
-  logo: "logos/Noir_Lux_Candle_Co._LLC_logo.svg", 
+  logo: "logos/NoirLuxCandleCo. LLC_logo.png", 
   name: "Noir Lux Candle Co. LLC", 
   tagline: "Luxury that lights up your mood.", 
   website: "https://noirluxcandleco.com/",
@@ -640,7 +639,7 @@ export const BUSINESSES: Business[] = [
 
 { 
   id: 'osmosis',
-  logo: "logos/Osmosis_Media_LLC_logo.png", 
+  logo: "logos/OsmosisMedia LLC_logo1.png", 
   name: "Osmosis Media LLC", 
   tagline: "Creativity that seeps into every channel.", 
   website: "https://osmosismedia.com/",
@@ -678,7 +677,7 @@ export const BUSINESSES: Business[] = [
   tagline: "Built right. Done once.", 
   website: "https://www.yelp.com/biz/pacific-northwest-1-stop-shop-everett#location-and-hours",
   industry: "Construction",
-  affinities: [],
+  affinities: ["Black Owned", "View In Person"],
   loanYear: 2023
 },
 
@@ -711,7 +710,7 @@ export const BUSINESSES: Business[] = [
   tagline: "Handcrafted comfort in every golden crust.", 
   website: "https://www.potpiefactory.co/",
   industry: "Food + Beverage",
-  affinities: [],
+  affinities: ["Black Owned", "Women Owned", "View In Person"],
   loanYear: 2022
 },
 { 
@@ -727,7 +726,7 @@ export const BUSINESSES: Business[] = [
 
 { 
   id: 'prostasia-security',
-  logo: "", 
+  logo: "logos/ProstasiaSecurityLLC_logo.png", 
   name: "Prostasia Security, LLC", 
   tagline: "Protection without compromise.", 
   website: "https://www.bizprofile.net/wa/mountlake-terrace/prostasia-security-llc",
@@ -941,7 +940,7 @@ export const BUSINESSES: Business[] = [
   tagline: "Slow smoked. Bold flavor. No shortcuts.", 
   website: "https://www.facebook.com/thebarbequepitseattle/",
   industry: "Food + Beverage",
-  affinities: [],
+  affinities: ["Black Owned","View In Person"],
   loanYear: 2022
 },
 
@@ -952,7 +951,7 @@ export const BUSINESSES: Business[] = [
   tagline: "Where stories live and minds grow.", 
   website: "https://thelakewoodbookstore.com/",
   industry: "Education",
-  affinities: [],
+  affinities: ["Black Owned", "Women Owned"],
   loanYear: 2026
 },
 
@@ -974,7 +973,7 @@ export const BUSINESSES: Business[] = [
   tagline: "Flavor that speaks for itself.", 
   website: "https://wsauceco.com/",
   industry: "Food + Beverage",
-  affinities: [],
+  affinities: ["View In Person"],
   loanYear: 2025
 },
 
@@ -1029,7 +1028,7 @@ export const BUSINESSES: Business[] = [
   tagline: "Authentic visuals. Global impact.", 
   website: "https://tonl.co/",
   industry: "Arts + Entertainment",
-  affinities: [],
+  affinities: ["Black Owned", "Women Owned"],
   loanYear: 2025
 },
 
