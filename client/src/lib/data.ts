@@ -11,7 +11,6 @@ export const INDUSTRIES = {
   'Social Services': '#141414',         // near-black
   'Transportation': '#141414',            // near-black
   'Visual Media': '#F2DFB6',  // clean creative neutral
-  'Web Development': '#FFB98A',           // warm peach
 } as const;
 
 
