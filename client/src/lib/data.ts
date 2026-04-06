@@ -4,11 +4,11 @@ export const INDUSTRIES = {
   'Education': '#FCBD25',                 // golden warmth
   'Food + Beverage': '#BF8F60',           // warm caramel
   'Health + Beauty': '#7FA56B',           // sage green
-  'Technology': '#0E4B3B',     // deep evergreen
   'Professional Services': '#3E392F',     // deep olive-charcoal
   'Retail': '#5A5F55',                    // warm off-white
   'Security Services': '#3E392F',
   'Social Services': '#141414',         // near-black
+  'Technology': '#0E4B3B',     // deep evergreen
   'Transportation': '#141414',            // near-black
   'Visual Media': '#F2DFB6',  // clean creative neutral
 } as const;
