@@ -13,7 +13,6 @@ export const INDUSTRIES = {
   'Visual Media': '#F2DFB6',  // clean creative neutral
 } as const;
 
-
 export const AFFINITIES = {
   'Black Owned': '#F2DFB6',
   'LGBTQIA+ Owned': '#3E392F',

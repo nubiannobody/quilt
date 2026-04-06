@@ -85,7 +85,7 @@ export default function Home() {
                   <h1 className="text-4xl md:text-6xl font-display font-extrabold tracking-tight mb-2">
                     <span className="text-[#7FA56B]">Who</span>{" "}
                     <span className="text-black">We</span>{" "}
-                    <span className="text-[#FCBD25]">Work</span>
+                    <span className="text-[#FCBD25]">Work</span>{" "}
                     <span className="text-[#7FA56B]">With</span>{" "}
                   </h1>
                   <p className="text-lg text-black max-w-2xl mx-auto">
