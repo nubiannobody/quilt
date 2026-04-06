@@ -83,15 +83,17 @@ export default function Home() {
               <div className="flex flex-col items-center gap-6 text-center">
                 <div className="w-full">
                   <h1 className="text-4xl md:text-6xl font-display font-extrabold tracking-tight mb-2">
-                    <span className="text-[#7FA56B]">Bricks</span>{" "}
-                    <span className="text-black">Not</span>{" "}
-                    <span className="text-[#FCBD25]">Sticks</span>
+                    <span className="text-[#7FA56B]">Who</span>{" "}
+                    <span className="text-black">We</span>{" "}
+                    <span className="text-[#FCBD25]">Work</span>
+                    <span className="text-[#7FA56B]">With</span>{" "}
                   </h1>
                   <p className="text-lg text-black max-w-2xl mx-auto">
-                    At Denkyem /den•CHem/ our mission is rooted in supporting
-                    Black-owned businesses. Explore them below: diverse
-                    industries, unique stories, and the people who weave our
-                    community together.
+                  Denkyem /den•CHem/ partners with established small businesses across Washington state that are ready for their next stage of growth. 
+                  We support entrepreneurs who need flexible, affordable capital that adapts to real‑world revenue seasonality. 
+                  Our focus is on long‑term relationships, helping business owners strengthen operations, expand capacity, 
+                  and stay connected to a community of peers and resources.
+
                   </p>
                 </div>
 
@@ -129,8 +131,18 @@ export default function Home() {
                 </Sheet>
               </div>
             </header>
-
             <QuiltGrid businesses={filteredBusinesses} />
+            <footer style={{ marginTop: "0.5rem", textAlign: "center", fontSize: "1.2rem", opacity: 0.7 }}>
+  Built With 🧡 by{" "}
+  <a 
+    href="https://mahoganyandmango.com" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    style={{ color: "#D97706", textDecoration: "underline", }}
+  >
+    Mahogany 'n' Mango
+  </a>
+</footer>
           </main>
         </div>
       </div>

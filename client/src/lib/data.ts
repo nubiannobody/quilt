@@ -1,16 +1,16 @@
 export const INDUSTRIES = {
   'Arts + Entertainment': '#F2DFB6',      // soft parchment
-  'Business Consulting': '#3E392F',       // grounded authority
   'Construction': '#8C6A4F',              // walnut brown
-  'Content + Photos Creator': '#F2DFB6',  // clean creative neutral
   'Education': '#FCBD25',                 // golden warmth
   'Food + Beverage': '#BF8F60',           // warm caramel
   'Health + Beauty': '#7FA56B',           // sage green
-  'Investment Technology': '#0E4B3B',     // deep evergreen
+  'Technology': '#0E4B3B',     // deep evergreen
   'Professional Services': '#3E392F',     // deep olive-charcoal
   'Retail': '#5A5F55',                    // warm off-white
-  'Security Services': '#141414',         // near-black
+  'Security Services': '#3E392F',
+  'Social Services': '#141414',         // near-black
   'Transportation': '#141414',            // near-black
+  'Visual Media': '#F2DFB6',  // clean creative neutral
   'Web Development': '#FFB98A',           // warm peach
 } as const;
 
@@ -24,7 +24,7 @@ export const AFFINITIES = {
 } as const;
 
 export const LOAN_YEARS = [
-   2021, 2022, 2023, 2024, 2025, 2026
+   2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026
 ] as const;
 
 export type LoanYear = typeof LOAN_YEARS[number];
@@ -50,7 +50,7 @@ export const BUSINESSES: Business[] = [
   name: "3D Ventures LLC", 
   tagline: "Innovating capital. Engineering opportunity.", 
   website: "https://www.3dventures.com/",
-  industry: "Investment Technology",
+  industry: "Technology",
   affinities: ["Black Owned", "Women Owned"],
   loanYear: 2025
 },
@@ -84,8 +84,8 @@ export const BUSINESSES: Business[] = [
   tagline: "Mixing beats and flavors that move your soul.", 
   website: "https://www.feedthepeopleseattle.com",
   industry: "Food + Beverage",
-  affinities: ["Black Owned", "View In Person"],
-  loanYear: 2023
+  affinities: ["Black Owned"],
+  loanYear: 2019
 },
 
 { 
@@ -94,7 +94,7 @@ export const BUSINESSES: Business[] = [
   name: "ACE Academy", 
   tagline: "Building brilliance, one student at a time.", 
   website: "https://www.aceacademywa.org/",
-  industry: "Professional Services",
+  industry: "Education",
   affinities: ["Black Owned"],
   loanYear: 2025
 },
@@ -106,7 +106,7 @@ export const BUSINESSES: Business[] = [
   tagline: "Where spotless spaces meet divine service.", 
   website: "https://achavacleaningco.com/",
   industry: "Professional Services",
-  affinities: ["Women Owned"],
+  affinities: ["Veteran Owned"],
   loanYear: 2025
 },
 
@@ -128,7 +128,7 @@ export const BUSINESSES: Business[] = [
   tagline: "A taste of the bayou in every bite.", 
   website: "https://althascajunspices.com",
   industry: "Food + Beverage",
-  affinities: ["Women Owned", "View In Person"],
+  affinities: ["Black Owned", "View In Person"],
   loanYear: 2024
 },
 
@@ -173,7 +173,7 @@ export const BUSINESSES: Business[] = [
   website: "https://www.boonboonacoffee.com/",
   industry: "Food + Beverage",
   affinities: ["Black Owned", "View In Person"],
-  loanYear: 2024
+  loanYear: 2019
 },
 
 { 
@@ -281,7 +281,7 @@ export const BUSINESSES: Business[] = [
   name: "Converge Media LLC", 
   tagline: "Where culture, creativity, and conversation meet.", 
   website: "https://www.whereweconverge.com/",
-  industry: "Arts + Entertainment",
+  industry: "Visual Media",
   affinities: ["Black Owned"],
   loanYear: 2025
 },
@@ -292,7 +292,7 @@ export const BUSINESSES: Business[] = [
   name: "Dopl Technologies Inc.", 
   tagline: "Simplifying tech for real-world impact.", 
   website: "https://www.dopltechnologies.com/",
-  industry: "Professional Services",
+  industry: "Technology",
   affinities: ["Black Owned"],
   loanYear: 2023
 },
@@ -338,7 +338,7 @@ export const BUSINESSES: Business[] = [
   website: "https://faithfinancecenter.mykajabi.com/",
   industry: "Professional Services",
   affinities: ["Black Owned"],
-  loanYear: 2025
+  loanYear: 2019
 },
 
 { 
@@ -402,8 +402,8 @@ export const BUSINESSES: Business[] = [
   name: "Inclusive Data LLC", 
   tagline: "Data that represents everyone. Insight that moves everyone.", 
   website: "https://inclusivedatasolutions.com/",
-  industry: "Investment Technology",
-  affinities: ["Black Owned", "Women Owned"],
+  industry: "Professional Services",
+  affinities: ["Black Owned", "LGBTQIA+ Owned"],
   loanYear: 2021
 },
 
@@ -413,7 +413,7 @@ export const BUSINESSES: Business[] = [
   name: "Inspirational WorkViews", 
   tagline: "Inspiring minds to lead, live, and thrive.", 
   website: "https://www.braveyoungpeople.org/",
-  industry: "Professional Services",
+  industry: "Education",
   affinities: ["Black Owned", "Women Owned"],
   loanYear: 2024
 },
@@ -430,12 +430,12 @@ export const BUSINESSES: Business[] = [
 },
 
 { 
-  id: 'infinite-llc',
+  id: 'Infitnite LLC',
   logo: "logos/InfiniteLLC_logo.jpg", 
-  name: "Infinite LLC", 
+  name: "Infinite LLC (Fantasy Fitness RPG Game)", 
   tagline: "Expanding vision. Scaling success.", 
   website: "https://www.instagram.com/infinite.llc/",
-  industry: "Business Consulting",
+  industry: "Technology",
   affinities: ["Black Owned"],
   loanYear: 2025
 },
@@ -448,7 +448,7 @@ export const BUSINESSES: Business[] = [
   website: "https://www.instagram.com/jacobwillardhome/?hl=en",
   industry: "Retail",
   affinities: ["Black Owned"],
-  loanYear: 2021
+  loanYear: 2019
 },
 
 { 
@@ -468,7 +468,7 @@ export const BUSINESSES: Business[] = [
   name: "Jacobs Agro LLC", 
   tagline: "Rooted in sustainability, growing for tomorrow.", 
   website: "https://jacobsagro.com/",
-  industry: "Retail",
+  industry: "Food + Beverage",
   affinities: ["Black Owned"],
   loanYear: 2025
 },
@@ -512,7 +512,7 @@ export const BUSINESSES: Business[] = [
   name: "Lifestyle LLC", 
   tagline: "Curating comfort, class, and culture.", 
   website: "https://www.lifestylevalet.net/",
-  industry: "Retail",
+  industry: "Transportation",
   affinities: ["Black Owned"],
   loanYear: 2024
 },
@@ -524,7 +524,7 @@ export const BUSINESSES: Business[] = [
   tagline: "Sip under the stars — taste the moonlight.", 
   website: "https://jetcitylabs.com/revelry/",
   industry: "Food + Beverage",
-  affinities: ["Black Owned", "Women Owned", "View In Person"],
+  affinities: ["Black Owned", "View In Person"],
   loanYear: 2025
 },
 
@@ -540,24 +540,13 @@ export const BUSINESSES: Business[] = [
 },
 
 { 
-  id: 'mahogany-mango',
-  logo: "logos/mango5.png", 
-  name: "Mahogany & Mango", 
-  tagline: "From your head to the web.", 
-  website: "https://www.mahoganyandmango.com/",
-  industry: "Web Development",
-  affinities: ["Black Owned", "Women Owned"],
-  loanYear: 2026
-},
-
-{ 
   id: 'mama-row',
   logo: "logos/Mama_Row's_Caramel_Corp_logo.webp", 
   name: "Mama Row's Caramel Corp", 
   tagline: "Sweetness made from soul and legacy.", 
   website: "https://www.mamarowscaramel.com/",
   industry: "Food + Beverage",
-  affinities: ["Women Owned", "Black Owned"],
+  affinities: ["Black Owned"],
   loanYear: 2024
 },
 
@@ -655,7 +644,7 @@ export const BUSINESSES: Business[] = [
   name: "Osmosis Media LLC", 
   tagline: "Creativity that seeps into every channel.", 
   website: "https://osmosismedia.com/",
-  industry: "Arts + Entertainment",
+  industry: "Visual Media",
   affinities: ["Black Owned"],
   loanYear: 2025
 },
@@ -700,7 +689,7 @@ export const BUSINESSES: Business[] = [
   tagline: "Cookies so good, they deserve applause.", 
   website: "https://lovethesecookies.com/",
   industry: "Food + Beverage",
-  affinities: ["Black Owned", "View In Person"],
+  affinities: ["Black Owned"],
   loanYear: 2024
 },
 
@@ -722,7 +711,7 @@ export const BUSINESSES: Business[] = [
   tagline: "Handcrafted comfort in every golden crust.", 
   website: "https://www.potpiefactory.co/",
   industry: "Food + Beverage",
-  affinities: ["Black Owned", "Women Owned", "View In Person"],
+  affinities: ["Black Owned", "Women Owned"],
   loanYear: 2022
 },
 { 
@@ -819,7 +808,7 @@ export const BUSINESSES: Business[] = [
   name: "Richlandhub LLC", 
   tagline: "Connecting business, innovation, and growth.", 
   website: "https://richlandhub.com/",
-  industry: "Professional Services",
+  industry: "Food + Beverage",
   affinities: ["Black Owned"],
   loanYear: 2025
 },
@@ -896,7 +885,7 @@ export const BUSINESSES: Business[] = [
   name: "SpoonFed Training LLC", 
   tagline: "Feeding your potential, one skill at a time.", 
   website: "https://www.spoonfedtraining.com/",
-  industry: "Professional Services",
+  industry: "Health + Beauty",
   affinities: ["Black Owned"],
   loanYear: 2025
 },
@@ -918,7 +907,7 @@ export const BUSINESSES: Business[] = [
   name: "Surety Security, LLC", 
   tagline: "Your safety, our commitment.", 
   website: "https://www.suretysecuritypnw.com/",
-  industry: "Professional Services",
+  industry: "Security Services",
   affinities: ["Black Owned"],
   loanYear: 2025
 },
@@ -952,8 +941,8 @@ export const BUSINESSES: Business[] = [
   tagline: "Slow smoked. Bold flavor. No shortcuts.", 
   website: "https://www.facebook.com/thebarbequepitseattle/",
   industry: "Food + Beverage",
-  affinities: ["Black Owned","View In Person"],
-  loanYear: 2022
+  affinities: ["Black Owned"],
+  loanYear: 2020
 },
 
 { 
@@ -974,7 +963,7 @@ export const BUSINESSES: Business[] = [
   tagline: "Delivering stories worth opening.", 
   website: "https://www.facebook.com/thepostmanseattle/",
   industry: "Transportation",
-  affinities: ["Black Owned", "View In Person"],
+  affinities: ["Black Owned"],
   loanYear: 2024
 },
 
@@ -985,7 +974,7 @@ export const BUSINESSES: Business[] = [
   tagline: "Flavor that speaks for itself.", 
   website: "https://wsauceco.com/",
   industry: "Food + Beverage",
-  affinities: ["View In Person"],
+  affinities: [],
   loanYear: 2025
 },
 
@@ -1083,7 +1072,7 @@ export const BUSINESSES: Business[] = [
   name: "Urban Hills Group LLC", 
   tagline: "Rising communities. Built with care.", 
   website: "https://www.urbanhig.org/",
-  industry: "Construction",
+  industry: "Professional Services",
   affinities: ["Black Owned"],
   loanYear: 2025
 },
@@ -1094,7 +1083,7 @@ export const BUSINESSES: Business[] = [
   name: "Village Life Project", 
   tagline: "Building stronger communities, one family at a time.", 
   website: "https://www.villagelifeproject.org/",
-  industry: "Professional Services",
+  industry: "Social Services",
   affinities: ["Black Owned"],
   loanYear: 2024
 },
@@ -1138,9 +1127,11 @@ export const BUSINESSES: Business[] = [
   name: "Wonder of Women", 
   tagline: "Celebrating womanhood, worldwide.", 
   website: "https://www.thewonderofwomen.org/",
-  industry: "Professional Services",
+  industry: "Arts + Entertainment",
   affinities: ["Women Owned", "Black Owned"],
   loanYear: 2024
 },
 
 ];
+
+
