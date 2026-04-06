@@ -133,7 +133,7 @@ export default function Home() {
             </header>
             <QuiltGrid businesses={filteredBusinesses} />
             <footer style={{ marginTop: "0.5rem", textAlign: "center", fontSize: "1.2rem", opacity: 0.7 }}>
-  Built With 🧡 by{" "}
+  Built With 🧡 By{" "}
   <a 
     href="https://mahoganyandmango.com" 
     target="_blank" 
