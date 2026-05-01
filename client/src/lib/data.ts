@@ -430,9 +430,9 @@ export const BUSINESSES: Business[] = [
 { 
   id: 'Infitnite LLC',
   logo: "logos/InfiniteLLC_logo.jpg", 
-  name: "Infinite LLC (Fantasy Fitness RPG Game)", 
+  name: "INFITNITE® | Fitness Fantasy RPG", 
   tagline: "Expanding vision. Scaling success.", 
-  website: "https://www.instagram.com/infinite.llc/",
+  website: "https://fitnessfantasyrpg.com",
   industry: "Technology",
   affinities: ["Black Owned"],
   loanYear: 2025
