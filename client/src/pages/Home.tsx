@@ -140,7 +140,7 @@ export default function Home() {
     rel="noopener noreferrer"
     style={{ color: "#D97706", textDecoration: "underline", }}
   >
-    Mahogany 'n' Mango
+    Mahogany & Mango
   </a>
 </footer>
           </main>
